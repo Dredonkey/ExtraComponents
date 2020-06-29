@@ -1,0 +1,30 @@
+def modName = "dredonkey.extracomponents"
+
+
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "idea"
+
+sourceCompatibility = 14
+targetCompatibility = 14
+
+sourceSets {
+    main {
+        java {
+            srcDirs "src/"
+        }
+        resources {
+            srcDirs "resources/"
+        }
+    }
+}
+dependencies {
+    compile files('libs/chromabeam-0.6.0-mdk.jar')
+}
+task packMod(type: Jar) {
+    archivesBaseName = modName
+    with jar
+    mkdir("out")
+    file("build/libs/" + modName + ".jar").renameTo("out/" + modName + ".jar")
+}
+packMod.dependsOn classes

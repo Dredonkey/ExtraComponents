@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: chromabeam-0.2.0-mdk.jar
+
