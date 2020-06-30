@@ -31,7 +31,6 @@ public class AND extends BasicComponent {
 
     @Override
     public void emitInitialBeams(MaskedWorld world) {
-
         if(emitting > 0)
             world.createBeam(rotation, emitting);
     }
@@ -47,19 +46,19 @@ public class AND extends BasicComponent {
     @Override
     protected void cloneDataFromOriginal(Component original) {
         this.emitting = ((AND)original).emitting;
-        this.state = ((AND)original).emitting;
+        this.state = ((AND)original).state;
     }
 
     @Override
     protected void serializeCustomData(Kryo kryo, Output output) {
-        output.writeByte(state);
         output.writeByte(emitting);
+        output.writeByte(state);
     }
 
     @Override
     protected void deserializeCustomData(Kryo kryo, Input input) {
-        state = input.readByte();
         emitting = input.readByte();
+        state = input.readByte();
     }
 
     @Override

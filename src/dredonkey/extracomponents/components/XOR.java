@@ -31,7 +31,6 @@ public class XOR extends BasicComponent {
 
     @Override
     public void emitInitialBeams(MaskedWorld world) {
-
         if(emitting > 0)
             world.createBeam(rotation, emitting);
     }
@@ -39,7 +38,9 @@ public class XOR extends BasicComponent {
     @Override
     public void componentUpdate() {
         emitting = leftInput ^ rightInput;
-        state = (leftInput > 0 ? 1 : 0) + (rightInput > 0 ? 2 : 0) + (emitting > 0 ? 1 : 0);
+        state = (leftInput > 0 ? 1 : 0) + (rightInput > 0 ? 2 : 0);
+        if(state == 3)
+            state += (emitting > 0 ? 1 : 0);
         leftInput = 0;
         rightInput = 0;
     }
@@ -47,7 +48,7 @@ public class XOR extends BasicComponent {
     @Override
     protected void cloneDataFromOriginal(Component original) {
         this.emitting = ((XOR)original).emitting;
-        this.state = ((XOR)original).emitting;
+        this.state = ((XOR)original).state;
     }
 
     @Override
